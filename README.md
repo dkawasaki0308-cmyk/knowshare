@@ -1,0 +1,98 @@
+# KnowShare — 社内ナレッジ共有アプリ
+
+チームの知識を記事にして共有・蓄積するプラットフォームです。
+
+**🔗 デモ: https://knowshare-ten.vercel.app**
+
+---
+
+## 技術スタック
+
+| カテゴリ | 技術 |
+|----------|------|
+| フロントエンド | Next.js 16 (App Router) / TypeScript / Tailwind CSS |
+| バックエンド | Next.js Route Handlers (REST API) |
+| 認証 | NextAuth.js v4 (JWT) |
+| ORM | Prisma 5 |
+| データベース | PostgreSQL (Neon) |
+| デプロイ | Vercel |
+
+---
+
+## 機能一覧
+
+- **記事の投稿・閲覧** — Markdown で記事を書いて公開
+- **タグ機能** — 複数タグで記事を分類
+- **キーワード検索** — タイトル・本文を横断検索
+- **いいね** — 記事にリアクションできる
+- **コメント** — 記事に対してコメントを投稿
+- **認証** — メールアドレス + パスワードでアカウント登録・ログイン
+
+---
+
+## ローカル起動手順
+
+```bash
+# 1. リポジトリをクローン
+git clone https://github.com/dkawasaki0308-cmyk/knowshare.git
+cd knowshare
+
+# 2. パッケージインストール
+npm install
+
+# 3. 環境変数を設定
+cp .env.example .env
+# .env を編集して DATABASE_URL などを入力
+
+# 4. DBマイグレーション
+npx prisma migrate dev
+
+# 5. 開発サーバー起動
+npm run dev
+```
+
+ブラウザで http://localhost:3000 を開く。
+
+---
+
+## 環境変数
+
+`.env.example` を参考に `.env` を作成してください。
+
+```env
+DATABASE_URL=          # PostgreSQL接続URL（Neon等）
+DIRECT_URL=            # PostgreSQL直接接続URL
+NEXTAUTH_SECRET=       # 任意のランダム文字列（32文字以上推奨）
+NEXTAUTH_URL=          # ローカルは http://localhost:3000
+```
+
+---
+
+## 工夫した点
+
+**設計面**
+- Next.js App Router の Server Components と Client Components を適切に使い分け、不要なクライアントサイドレンダリングを避けた
+- Prisma の `connectOrCreate` を使いタグの重複登録を防いだ
+- JWT セッションを採用し、DB へのセッション問い合わせを不要にすることで API レスポンスを軽量化した
+
+**実装面**
+- いいねのトグル（追加・取り消し）を1つのエンドポイント（POST）で完結させ、シンプルなAPI設計にした
+- Prisma の `_count` を活用しいいね数・コメント数を N+1 なしで取得している
+- 記事一覧のタグクリックでフィルタリングできるよう、クエリパラメータで状態管理した
+
+---
+
+## 今後追加したい機能
+
+- [ ] AIによる記事自動要約（OpenAI API連携）
+- [ ] 全文検索の強化（PostgreSQL tsvector）
+- [ ] ユーザープロフィールページ
+- [ ] Slack / Discord 通知連携（新規投稿時）
+- [ ] テストコード（Vitest）
+
+---
+
+## 作成の背景
+
+Sky株式会社のジョブ型長期インターンシップ（社内DXシステム開発コース）で扱う「社内SNS・社内ブログ」の開発に近い技術と業務領域を自分で体験するために作成しました。
+社員同士の情報共有を支えるシステムを実際に設計・実装することで、Webアプリケーション開発の一連のフローを習得しました。

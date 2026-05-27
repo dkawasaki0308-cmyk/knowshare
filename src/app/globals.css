@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Markdown prose styles */
+.prose h1 { font-size: 1.75rem; font-weight: 700; margin: 1.5rem 0 0.75rem; }
+.prose h2 { font-size: 1.4rem; font-weight: 700; margin: 1.5rem 0 0.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.25rem; }
+.prose h3 { font-size: 1.15rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+.prose p { margin: 0.75rem 0; line-height: 1.75; color: #374151; }
+.prose ul { list-style: disc; padding-left: 1.5rem; margin: 0.75rem 0; }
+.prose ol { list-style: decimal; padding-left: 1.5rem; margin: 0.75rem 0; }
+.prose li { margin: 0.25rem 0; color: #374151; }
+.prose code { background: #f3f4f6; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.875em; font-family: monospace; }
+.prose pre { background: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin: 1rem 0; }
+.prose pre code { background: transparent; padding: 0; font-size: 0.875rem; }
+.prose blockquote { border-left: 4px solid #3b82f6; padding-left: 1rem; color: #6b7280; margin: 1rem 0; font-style: italic; }
+.prose a { color: #2563eb; text-decoration: underline; }
+.prose table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.prose th, .prose td { border: 1px solid #e5e7eb; padding: 0.5rem 0.75rem; text-align: left; }
+.prose th { background: #f9fafb; font-weight: 600; }
