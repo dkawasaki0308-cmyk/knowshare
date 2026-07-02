@@ -57,7 +57,12 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
         >
-          {loading ? "ログイン中..." : "ログイン"}
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ログイン中...
+            </span>
+          ) : "ログイン"}
         </button>
       </form>
       <p className="mt-4 text-center text-sm text-gray-500">
